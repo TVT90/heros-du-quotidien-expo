@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Héros du quotidien — Via Gnosis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivoire: #f6f1e6;
+    --ivoire-carte: #fbf8f1;
+    --encre: #26221c;
+    --encre-douce: #4a4438;
+    --or: #b8903c;
+    --or-clair: #d9b876;
+    --ligne: #e4dac4;
+    --ombre: rgba(38,34,28,0.14);
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background: var(--ivoire);
+    color: var(--encre);
+    font-family: 'EB Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .fond{
+    min-height:100vh;
+    padding: 64px 20px 48px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .page{
+    width:100%;
+    max-width: 980px;
+  }
+
+  /* En-tête */
+  header.expo{
+    text-align:center;
+    margin-bottom: 56px;
+  }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 0 0 10px;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(38px, 7vw, 58px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+
+  .lieu-dates{
+    font-family:'Jost', sans-serif;
+    font-size: 14px;
+    color: var(--encre-douce);
+    margin: 0 0 26px;
+    letter-spacing: 0.3px;
+  }
+
+  .intro{
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--encre-douce);
+  }
+
+  .devise{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--encre);
+    margin: 22px 0 0;
+  }
+
+  /* Grille des séries */
+  .series{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-bottom: 56px;
+  }
+
+  .carte-serie{
+    background: var(--ivoire-carte);
+    border: 1px solid var(--ligne);
+    padding: 28px 26px;
+    box-shadow: 0 20px 40px -24px var(--ombre);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .carte-serie .numero{
+    font-family:'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 0 0 6px;
+  }
+
+  .carte-serie h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0 0 12px;
+  }
+
+  .carte-serie p{
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--encre-douce);
+    margin: 0 0 20px;
+    flex-grow:1;
+  }
+
+  .carte-serie .lien{
+    font-family:'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align:center;
+    padding: 10px 0;
+    border: 1px solid var(--or);
+    color: var(--or);
+    transition: all 0.15s ease;
+  }
+
+  .carte-serie .lien:hover{
+    background: var(--or);
+    color: var(--ivoire-carte);
+  }
+
+  .carte-serie .lien.indisponible{
+    border-color: var(--ligne);
+    color: var(--encre-douce);
+    opacity: 0.6;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* Pied de page / contact */
+  .contact{
+    text-align:center;
+    padding-top: 32px;
+    border-top: 1px solid var(--ligne);
+  }
+
+  .contact .titre-rubrique{
+    font-family:'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 0 0 14px;
+  }
+
+  .contact ul{
+    list-style:none;
+    margin:0 0 24px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+    font-family:'Jost', sans-serif;
+    font-size: 14px;
+    color: var(--encre-douce);
+  }
+
+  .contact a{
+    color: var(--encre);
+    text-decoration:none;
+  }
+  .contact a:hover{ color: var(--or); }
+
+  .pied{
+    text-align:center;
+    font-family:'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--encre-douce);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 480px){
+    .fond{ padding: 44px 16px 32px; }
+    .carte-serie{ padding: 22px 20px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .page{ animation: apparition 0.7s ease-out; }
+    @keyframes apparition{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="fond">
+  <div class="page">
+
+    <header class="expo">
+      <p class="eyebrow">Via Gnosis</p>
+      <h1>Héros du quotidien</h1>
+      <p class="lieu-dates">Hôpital Nord Franche-Comté — du 1<sup>er</sup> au 25 septembre 2026</p>
+      <div class="intro">
+        <p>Trente instants suspendus, saisis au cœur du quotidien hospitalier — des regards, des gestes, des présences qui rappellent que la lumière trouve toujours un chemin, même dans la fêlure.</p>
+        <p class="devise">« C'est par les fêlures que vient la lumière. »</p>
+      </div>
+    </header>
+
+    <section class="series">
+
+      <article class="carte-serie">
+        <p class="numero">Série 1</p>
+        <h2>Les liens</h2>
+        <p>Les liens qui se tissent entre patients de tous âges — complicité, main tendue, regard échangé.</p>
+        <a class="lien" href="oeuvre-01-le-regard-partage.html">Découvrir</a>
+      </article>
+
+      <article class="carte-serie">
+        <p class="numero">Série 2</p>
+        <h2>Les éclats de vie</h2>
+        <p>Des fragments de vie ordinaire qui persistent et rayonnent au sein de l'hôpital.</p>
+        <a class="lien indisponible" href="#">Bientôt disponible</a>
+      </article>
+
+      <article class="carte-serie">
+        <p class="numero">Série 3</p>
+        <h2>Les passeurs</h2>
+        <p>Ceux qui accompagnent, transmettent, veillent — les passeurs silencieux du soin.</p>
+        <a class="lien indisponible" href="#">Bientôt disponible</a>
+      </article>
+
+      <article class="carte-serie">
+        <p class="numero">Série 4</p>
+        <h2>Les gestes qui restent</h2>
+        <p>Des gestes simples, répétés, qui marquent durablement une vie ou un souvenir.</p>
+        <a class="lien indisponible" href="#">Bientôt disponible</a>
+      </article>
+
+      <article class="carte-serie">
+        <p class="numero">Série 5</p>
+        <h2>Respirations</h2>
+        <p>Des instants de pause et de calme retrouvés au milieu du soin.</p>
+        <a class="lien indisponible" href="#">Bientôt disponible</a>
+      </article>
+
+      <article class="carte-serie">
+        <p class="numero">Série 6</p>
+        <h2>Les gardiens</h2>
+        <p>Celles et ceux qui veillent, protègent et accompagnent avec constance.</p>
+        <a class="lien indisponible" href="#">Bientôt disponible</a>
+      </article>
+
+    </section>
+
+    <div class="contact">
+      <p class="titre-rubrique">Nous contacter</p>
+      <ul>
+        <li><a href="mailto:tvoitot.ia@gmail.com">tvoitot.ia@gmail.com</a></li>
+        <li><a href="tel:+33683582755">06 83 58 27 55</a></li>
+        <li><a href="https://tvt90.github.io/artist-presentation/" target="_blank" rel="noopener">tvt90.github.io/artist-presentation</a></li>
+      </ul>
+      <p class="pied">Héros du quotidien — Hôpital Nord Franche-Comté — 1er au 25 septembre 2026</p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
