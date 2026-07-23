@@ -189,8 +189,8 @@
   }
 
   .encart img{
-    width: 64px;
-    height: 64px;
+    width: 192px;
+    height: 192px;
     object-fit: contain;
     flex-shrink: 0;
   }
@@ -222,8 +222,9 @@
   }
   .encart a:hover{ color: var(--or); }
 
-  @media (max-width: 480px){
+  @media (max-width: 640px){
     .encart{ flex-direction:column; text-align:center; }
+    .encart .encart-corps ul{ align-items:center; }
   }
 
   .pied{
@@ -330,8 +331,9 @@
         <article class="encart">
           <img src="logo-lorius.png" alt="Logo Lorius">
           <div class="encart-corps">
-            <h3>Partenaire : Olivier Hugoniot</h3>
+            <h3>Partenaire : Lorius</h3>
             <ul>
+              <li><a href="mailto:o.hugoniot@nexusia.fr">o.hugoniot@nexusia.fr</a></li>
               <li><a href="tel:+33381907690">03 81 90 76 90</a></li>
               <li><a href="https://lorius.eu" target="_blank" rel="noopener">Lorius.eu</a></li>
             </ul>
