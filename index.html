@@ -472,30 +472,9 @@
     }
 
     voile.addEventListener('click', demarrerMusique);
-
-    // Fondu sonore (~0.5s) avant de quitter la page via un lien de navigation interne
-    var duréeFondu = 500; // ms
-    document.querySelectorAll('a.lien').forEach(function(lien){
-      lien.addEventListener('click', function(e){
-        if (musique.paused) return; // rien à couper
-        e.preventDefault();
-        var cible = lien.href;
-        var volumeDepart = musique.volume;
-        var debut = performance.now();
-
-        function fondu(instant){
-          var progression = Math.min((instant - debut) / duréeFondu, 1);
-          musique.volume = volumeDepart * (1 - progression);
-          if (progression < 1){
-            requestAnimationFrame(fondu);
-          } else {
-            musique.pause();
-            window.location.href = cible;
-          }
-        }
-        requestAnimationFrame(fondu);
-      });
-    });
+    // Les liens "Découvrir" gardent leur comportement natif : cliquer navigue
+    // immédiatement, sans interception JavaScript. La musique s'arrête d'elle-même
+    // puisque la page suivante ne la contient pas — aucun risque de blocage du clic.
   })();
 </script>
 
