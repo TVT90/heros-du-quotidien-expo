@@ -283,26 +283,63 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--or);
-    margin: 0 0 14px;
+    margin: 0 0 24px;
   }
 
-  .contact ul{
+  .encarts{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+    text-align:left;
+  }
+
+  .encart{
+    background: var(--ivoire-carte);
+    border: 1px solid var(--ligne);
+    padding: 22px 24px;
+    display:flex;
+    align-items:center;
+    gap: 18px;
+  }
+
+  .encart img{
+    width: 192px;
+    height: 192px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .encart .encart-corps h3{
+    font-family:'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 0 0 8px;
+  }
+
+  .encart ul{
     list-style:none;
     margin:0;
     padding:0;
     display:flex;
     flex-direction:column;
-    gap: 6px;
+    gap: 4px;
     font-family:'Jost', sans-serif;
     font-size: 14px;
     color: var(--encre-douce);
   }
 
-  .contact a{
+  .encart a{
     color: var(--encre);
     text-decoration:none;
   }
-  .contact a:hover{ color: var(--or); }
+  .encart a:hover{ color: var(--or); }
+
+  @media (max-width: 640px){
+    .encart{ flex-direction:column; text-align:center; }
+  }
 
   .pied{
     text-align:center;
@@ -382,11 +419,34 @@
 
     <div class="contact" id="contact">
       <p class="titre-rubrique">Nous contacter</p>
-      <ul>
-        <li><a href="mailto:tvoitot.ia@gmail.com">tvoitot.ia@gmail.com</a></li>
-        <li><a href="tel:+33683582755">06 83 58 27 55</a></li>
-        <li><a href="https://tvt90.github.io/artist-presentation/" target="_blank" rel="noopener">tvt90.github.io/artist-presentation</a></li>
-      </ul>
+
+      <div class="encarts">
+
+        <article class="encart">
+          <img src="logo-via-gnosis.png" alt="Logo VIA GNOSIS">
+          <div class="encart-corps">
+            <h3>Artiste : Thierry VOITOT</h3>
+            <ul>
+              <li><a href="mailto:tvoitot.ia@gmail.com">tvoitot.ia@gmail.com</a></li>
+              <li><a href="tel:+33683582755">06 83 58 27 55</a></li>
+              <li><a href="https://tvt90.github.io/artist-presentation/" target="_blank" rel="noopener">tvt90.github.io/artist-presentation</a></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="encart">
+          <img src="logo-lorius.png" alt="Logo Lorius">
+          <div class="encart-corps">
+            <h3>Partenaire : Lorius</h3>
+            <ul>
+              <li><a href="mailto:o.hugoniot@nexusia.fr">o.hugoniot@nexusia.fr</a></li>
+              <li><a href="tel:+33381907690">03 81 90 76 90</a></li>
+              <li><a href="https://lorius.eu" target="_blank" rel="noopener">Lorius.eu</a></li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
     </div>
 
     <p class="pied">Héros du quotidien — Hôpital Nord Franche-Comté — 1er au 25 septembre 2026</p>
