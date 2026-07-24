@@ -21,6 +21,38 @@
 
   *{ box-sizing:border-box; }
 
+  /* Voile d'entrée — déclenche la musique au premier clic */
+  #voile-entree{
+    position:fixed;
+    inset:0;
+    z-index: 999;
+    background: var(--ivoire);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition: opacity 0.8s ease;
+  }
+  #voile-entree.masque{
+    opacity:0;
+    pointer-events:none;
+  }
+  #voile-entree .invite{
+    text-align:center;
+    font-family:'Jost', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--or);
+    font-size: 12px;
+  }
+  #voile-entree .invite .trait{
+    display:block;
+    width: 36px;
+    height: 1px;
+    background: var(--or-clair);
+    margin: 14px auto 0;
+  }
+
   body{
     margin:0;
     background: var(--ivoire);
@@ -252,6 +284,12 @@
 </head>
 <body>
 
+<div id="voile-entree">
+  <p class="invite">Cliquez pour entrer<span class="trait"></span></p>
+</div>
+
+<audio id="musique-accueil" src="ouverture-accueil.mp3" preload="auto" loop></audio>
+
 <div class="fond">
   <div class="page">
 
@@ -347,6 +385,51 @@
 
   </div>
 </div>
+
+<script>
+  (function(){
+    var voile = document.getElementById('voile-entree');
+    var musique = document.getElementById('musique-accueil');
+    var dejaDemarree = false;
+
+    function demarrerMusique(){
+      if (dejaDemarree) return;
+      dejaDemarree = true;
+      musique.volume = 1;
+      musique.play().catch(function(){
+        // Lecture bloquée par le navigateur : on retente au clic suivant.
+        dejaDemarree = false;
+      });
+      voile.classList.add('masque');
+    }
+
+    voile.addEventListener('click', demarrerMusique);
+
+    // Fondu sonore (~0.5s) avant de quitter la page via un lien de navigation interne
+    var duréeFondu = 500; // ms
+    document.querySelectorAll('a.lien').forEach(function(lien){
+      lien.addEventListener('click', function(e){
+        if (musique.paused) return; // rien à couper
+        e.preventDefault();
+        var cible = lien.href;
+        var volumeDepart = musique.volume;
+        var debut = performance.now();
+
+        function fondu(instant){
+          var progression = Math.min((instant - debut) / duréeFondu, 1);
+          musique.volume = volumeDepart * (1 - progression);
+          if (progression < 1){
+            requestAnimationFrame(fondu);
+          } else {
+            musique.pause();
+            window.location.href = cible;
+          }
+        }
+        requestAnimationFrame(fondu);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
